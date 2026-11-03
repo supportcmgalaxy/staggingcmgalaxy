@@ -47,7 +47,7 @@ $docs_home_url = get_post_type_archive_link('docs') ? get_post_type_archive_link
                             <li><a href="<?php echo esc_url($term_link); ?>"><?php echo esc_html($first_term->name); ?></a></li>
                         <?php endif; ?>
                         <li class="breadcrumb-separator">/</li>
-                        <li class="active-crumb" aria-current="page" title="<?php echo esc_attr(get_the_title()); ?>"><?php echo esc_html(wp_trim_words(get_the_title(), 3, '...')); ?></li>
+                        <li class="active-crumb" aria-current="page" title="<?php echo esc_attr(get_the_title()); ?>"><?php echo esc_html(wp_trim_words(get_the_title(), 8, '...')); ?></li>
                     </ol>
                 </nav>
 

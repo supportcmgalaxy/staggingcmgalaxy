@@ -1017,38 +1017,42 @@ body.page-template-page-all-categories,
     }
 }
 
-/* Breadcrumbs */
+/* Breadcrumbs (Matches docs.cmgalaxy.com / Docy) */
 .custom-breadcrumb {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 6px;
     padding: 0;
-    margin: 0 0 12px 0;
+    margin: 0 0 20px 0;
     list-style: none;
-    font-size: 13px;
-    line-height: 1.4;
+    font-size: 15px;
+    line-height: 1.5;
 }
 
 .custom-breadcrumb a {
-    color: #64748b !important;
+    color: #000000 !important;
+    font-weight: 500;
     text-decoration: none;
     transition: color 0.15s ease;
 }
 
 .custom-breadcrumb a:hover {
-    color: #1e293b !important;
+    color: #2563eb !important;
     text-decoration: underline;
 }
 
 .custom-breadcrumb .breadcrumb-separator {
-    color: #94a3b8;
-    font-size: 12px;
+    color: #64748b;
+    font-size: 14px;
+    padding: 0 8px;
+    display: inline-flex;
+    align-items: center;
 }
 
 .custom-breadcrumb .active-crumb {
-    color: #0f172a !important;
-    max-width: 220px;
+    color: #484a61 !important;
+    font-weight: 500;
+    max-width: 450px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
