@@ -912,10 +912,13 @@ add_filter('content_control_restriction_message', function($message) {
     return $message;
 }, 999);
 
-// Add cmg-gated-doc body class on restricted/gated doc posts
+// Add cmg-gated-doc body class on restricted/gated doc posts ONLY when the visitor is blocked by the gate
 add_filter('body_class', function($classes) {
     if (is_singular(array('docs', 'post')) && function_exists('cmg_is_post_restricted_to_logged_in') && cmg_is_post_restricted_to_logged_in(get_the_ID())) {
-        $classes[] = 'cmg-gated-doc';
+        $is_preview_gate = isset($_GET['preview_gate']) || isset($_GET['gated']);
+        if (!is_user_logged_in() || $is_preview_gate) {
+            $classes[] = 'cmg-gated-doc';
+        }
     }
     return $classes;
 });

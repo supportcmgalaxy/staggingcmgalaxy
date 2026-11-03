@@ -624,14 +624,13 @@ body.page-template-page-all-categories,
     z-index: 2 !important;
 }
 
-/* Gray Indicator Bar for Gated / Paywalled Posts (where modal appears) */
-.sidebar-subcat-post-item.gated-article .active-indicator-bar,
-.sidebar-sub-subcat-item.gated-article .active-indicator-bar,
-.sidebar-subcat-post-item .active-indicator-bar.is-gated,
-.sidebar-sub-subcat-item .active-indicator-bar.is-gated,
+/* Gray Indicator Bar for Gated / Paywalled Posts (only when modal appears) */
 body.cmg-gated-doc .sidebar-subcat-post-item.active-article .active-indicator-bar,
 body.cmg-gated-doc .sidebar-sub-subcat-item.active-article .active-indicator-bar,
-body.cmg-gated-doc .sidebar-subcat-post-item .active-indicator-bar {
+body.cmg-gated-doc .sidebar-subcat-post-item .active-indicator-bar.is-gated,
+body.cmg-gated-doc .sidebar-sub-subcat-item .active-indicator-bar.is-gated,
+body.cmg-gated-doc .sidebar-subcat-post-item.gated-article .active-indicator-bar,
+body.cmg-gated-doc .sidebar-sub-subcat-item.gated-article .active-indicator-bar {
     background: #94a3b8 !important;
 }
 
