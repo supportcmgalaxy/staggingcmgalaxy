@@ -1635,9 +1635,6 @@ body.page-template-page-all-categories,
 }
 
 .cmg-paywall-gate {
-    display: grid !important;
-    grid-template-columns: 1fr !important;
-    grid-template-rows: 1fr !important;
     position: relative !important;
     width: 100% !important;
     margin-top: 15px !important;
@@ -1646,8 +1643,6 @@ body.page-template-page-all-categories,
 }
 
 .cmg-blurred-backdrop {
-    grid-column: 1 !important;
-    grid-row: 1 !important;
     position: relative !important;
     width: 100% !important;
     max-height: none !important;
@@ -1685,23 +1680,43 @@ body.page-template-page-all-categories,
 }
 
 .cmg-paywall-sticky-overlay {
-    grid-column: 1 !important;
-    grid-row: 1 !important;
-    align-self: start !important;
-    justify-self: center !important;
-    position: -webkit-sticky !important;
-    position: sticky !important;
-    top: 50vh !important;
-    transform: translateY(-50%) !important;
-    width: 100% !important;
-    max-width: 580px !important;
-    height: fit-content !important;
     z-index: 60 !important;
     pointer-events: none !important;
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
+    box-sizing: border-box !important;
     margin: 0 auto !important;
+    padding: 0 15px !important;
+    width: 100% !important;
+    max-width: 580px !important;
+}
+
+/* Default / Viewport Center when reading gated content */
+.cmg-paywall-sticky-overlay,
+.cmg-paywall-sticky-overlay.is-fixed {
+    position: fixed !important;
+    top: 50% !important;
+    bottom: auto !important;
+    transform: translateY(-50%) !important;
+}
+
+/* Before reaching center (top of article) */
+.cmg-paywall-sticky-overlay.is-top {
+    position: absolute !important;
+    top: 40px !important;
+    bottom: auto !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+}
+
+/* Bottom dock (scrolled past article into Related Articles) */
+.cmg-paywall-sticky-overlay.is-bottom {
+    position: absolute !important;
+    top: auto !important;
+    bottom: 40px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
 }
 
 .cmg-paywall-card-wrap {

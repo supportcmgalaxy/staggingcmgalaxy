@@ -41,9 +41,6 @@ $is_popup    = isset($args['is_popup']) && $args['is_popup'];
 }
 
 .cmg-paywall-gate {
-    display: grid !important;
-    grid-template-columns: 1fr !important;
-    grid-template-rows: 1fr !important;
     position: relative !important;
     width: 100% !important;
     margin-top: 15px !important;
@@ -52,8 +49,6 @@ $is_popup    = isset($args['is_popup']) && $args['is_popup'];
 }
 
 .cmg-blurred-backdrop {
-    grid-column: 1 !important;
-    grid-row: 1 !important;
     position: relative !important;
     width: 100% !important;
     max-height: none !important;
@@ -91,23 +86,43 @@ $is_popup    = isset($args['is_popup']) && $args['is_popup'];
 }
 
 .cmg-paywall-sticky-overlay {
-    grid-column: 1 !important;
-    grid-row: 1 !important;
-    align-self: start !important;
-    justify-self: center !important;
-    position: -webkit-sticky !important;
-    position: sticky !important;
-    top: 50vh !important;
-    transform: translateY(-50%) !important;
-    width: 100% !important;
-    max-width: 580px !important;
-    height: fit-content !important;
     z-index: 60 !important;
     pointer-events: none !important;
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
+    box-sizing: border-box !important;
     margin: 0 auto !important;
+    padding: 0 15px !important;
+    width: 100% !important;
+    max-width: 580px !important;
+}
+
+/* Default / Viewport Center when reading gated content */
+.cmg-paywall-sticky-overlay,
+.cmg-paywall-sticky-overlay.is-fixed {
+    position: fixed !important;
+    top: 50% !important;
+    bottom: auto !important;
+    transform: translateY(-50%) !important;
+}
+
+/* Before reaching center (top of article) */
+.cmg-paywall-sticky-overlay.is-top {
+    position: absolute !important;
+    top: 40px !important;
+    bottom: auto !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+}
+
+/* Bottom dock (scrolled past article into Related Articles) */
+.cmg-paywall-sticky-overlay.is-bottom {
+    position: absolute !important;
+    top: auto !important;
+    bottom: 40px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
 }
 
 .cmg-paywall-card-wrap {
@@ -414,4 +429,95 @@ h2.cmg-upgrade-title,
 
 <?php if ($is_popup): ?>
 </div>
+<?php endif; ?>
+
+<?php if (!$is_popup): ?>
+<script>
+(function() {
+    function initPaywallScrollSync() {
+        var gate = document.querySelector('.cmg-paywall-gate');
+        var overlay = document.querySelector('.cmg-paywall-sticky-overlay');
+        if (!gate || !overlay) return;
+
+        var card = overlay.querySelector('.cmg-upgrade-card') || overlay;
+
+        // Allow mouse wheel scrolling when hovering directly on the modal card
+        overlay.addEventListener('wheel', function(e) {
+            window.scrollBy({ top: e.deltaY, left: e.deltaX, behavior: 'auto' });
+        }, { passive: true });
+
+        function updatePosition() {
+            var gateRect = gate.getBoundingClientRect();
+            var cardHeight = card.offsetHeight || 420;
+            var windowHeight = window.innerHeight || document.documentElement.clientHeight;
+            var centerTop = (windowHeight - cardHeight) / 2;
+            var centerX = gateRect.left + (gateRect.width / 2);
+
+            if (gateRect.top > centerTop) {
+                // User is above center of gate (top of article/teaser)
+                overlay.classList.remove('is-fixed', 'is-bottom');
+                overlay.classList.add('is-top');
+                overlay.style.setProperty('position', 'absolute', 'important');
+                overlay.style.setProperty('top', '40px', 'important');
+                overlay.style.setProperty('bottom', 'auto', 'important');
+                overlay.style.setProperty('left', '50%', 'important');
+                overlay.style.setProperty('transform', 'translateX(-50%)', 'important');
+                overlay.style.setProperty('width', '100%', 'important');
+            } else if (gateRect.bottom >= (centerTop + cardHeight + 40)) {
+                // User is scrolling through the article: pin modal dead-center of screen!
+                overlay.classList.remove('is-top', 'is-bottom');
+                overlay.classList.add('is-fixed');
+                overlay.style.setProperty('position', 'fixed', 'important');
+                overlay.style.setProperty('top', '50%', 'important');
+                overlay.style.setProperty('bottom', 'auto', 'important');
+                overlay.style.setProperty('left', centerX + 'px', 'important');
+                overlay.style.setProperty('transform', 'translate(-50%, -50%)', 'important');
+                overlay.style.setProperty('width', '100%', 'important');
+            } else {
+                // User scrolled past article into Related Articles: dock to bottom
+                overlay.classList.remove('is-top', 'is-fixed');
+                overlay.classList.add('is-bottom');
+                overlay.style.setProperty('position', 'absolute', 'important');
+                overlay.style.setProperty('top', 'auto', 'important');
+                overlay.style.setProperty('bottom', '40px', 'important');
+                overlay.style.setProperty('left', '50%', 'important');
+                overlay.style.setProperty('transform', 'translateX(-50%)', 'important');
+                overlay.style.setProperty('width', '100%', 'important');
+            }
+        }
+
+        var ticking = false;
+        function onScroll() {
+            if (!ticking) {
+                requestAnimationFrame(function() {
+                    updatePosition();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', updatePosition, { passive: true });
+
+        if (window.ResizeObserver) {
+            var ro = new ResizeObserver(updatePosition);
+            ro.observe(gate);
+            ro.observe(document.body);
+        }
+
+        updatePosition();
+        setTimeout(updatePosition, 100);
+        setTimeout(updatePosition, 300);
+        setTimeout(updatePosition, 600);
+        setTimeout(updatePosition, 1000);
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initPaywallScrollSync);
+    } else {
+        initPaywallScrollSync();
+    }
+})();
+</script>
 <?php endif; ?>
