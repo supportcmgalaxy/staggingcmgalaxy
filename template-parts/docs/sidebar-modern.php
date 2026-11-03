@@ -448,7 +448,7 @@ $sidebar_instance_id = uniqid('docs_sb_');
                                 $subcat_expanded_class = ($is_sub_active && $has_children) ? ' expanded' : '';
                             ?>
                                 <div class="cmgalaxy-subcat-wrapper" data-term-id="<?php echo esc_attr($sub->term_id); ?>">
-                                    <div class="subsection-item <?php echo $is_sub_active ? 'current-page active-subcat' : ''; ?> <?php echo $has_children ? 'expandable-subcat' : ''; ?><?php echo $subcat_expanded_class; ?>" data-target="<?php echo esc_attr($sub_target_id); ?>" style="padding-left: 55px; display: flex; align-items: center; padding-top: 10px; padding-bottom: 10px; cursor: pointer; justify-content: space-between;">
+                                    <div class="subsection-item <?php echo $is_sub_active ? 'current-page active-subcat' : ''; ?> <?php echo $has_children ? 'expandable-subcat' : ''; ?><?php echo $subcat_expanded_class; ?>" data-target="<?php echo esc_attr($sub_target_id); ?>">
                                         <a href="<?php echo esc_url($sub_link); ?>" class="subsection-title cm-tooltip-target" data-cm-tooltip="<?php echo esc_attr($sub->name); ?>" style="color:#475569; font-weight:<?php echo $is_sub_active ? '600' : '500'; ?>; font-size: 14px; text-decoration: none; flex: 1; padding-right: 10px; display: flex; align-items: center; justify-content: space-between; width: 100%; overflow: hidden;">
                                             <span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex: 1; pointer-events: none;"><?php echo esc_html($sub->name); ?></span>
                                         </a>
