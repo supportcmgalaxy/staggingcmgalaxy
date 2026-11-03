@@ -1023,9 +1023,9 @@ body.page-template-page-all-categories,
     flex-wrap: wrap;
     align-items: center;
     padding: 0;
-    margin: 0 0 20px 0;
+    margin: 0 0 40px 0;
     list-style: none;
-    font-size: 15px;
+    font-size: 12px;
     line-height: 1.5;
 }
 
