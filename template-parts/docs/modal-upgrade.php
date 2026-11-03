@@ -44,35 +44,45 @@ $is_popup    = isset($args['is_popup']) && $args['is_popup'];
     position: relative !important;
     width: 100% !important;
     margin-top: 15px !important;
-    min-height: 520px !important;
+    min-height: 600px !important;
     overflow: visible !important;
 }
 
 .cmg-blurred-backdrop {
     position: relative !important;
     width: 100% !important;
-    max-height: 480px !important;
-    overflow: hidden !important;
+    max-height: none !important;
+    overflow: visible !important;
     user-select: none !important;
     -webkit-user-select: none !important;
     pointer-events: none !important;
     filter: blur(5px) !important;
     -webkit-filter: blur(5px) !important;
-    opacity: 0.45 !important;
+    opacity: 0.55 !important;
     padding-top: 4px !important;
-    padding-bottom: 40px !important;
-    mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.65) 200px, rgba(0,0,0,0.05) 100%) !important;
-    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.65) 200px, rgba(0,0,0,0.05) 100%) !important;
+    padding-bottom: 80px !important;
+    mask-image: none !important;
+    -webkit-mask-image: none !important;
 }
 
 .cmg-blurred-backdrop p,
+.cmg-blurred-backdrop h1,
 .cmg-blurred-backdrop h2,
 .cmg-blurred-backdrop h3,
+.cmg-blurred-backdrop h4,
+.cmg-blurred-backdrop h5,
+.cmg-blurred-backdrop h6,
 .cmg-blurred-backdrop ul,
-.cmg-blurred-backdrop ol {
+.cmg-blurred-backdrop ol,
+.cmg-blurred-backdrop figure,
+.cmg-blurred-backdrop table,
+.cmg-blurred-backdrop img {
     margin-bottom: 1.25rem !important;
     color: #334155 !important;
     line-height: 1.75 !important;
+    max-width: 100% !important;
+    height: auto !important;
+    pointer-events: none !important;
 }
 
 .cmg-paywall-sticky-overlay {
@@ -93,7 +103,7 @@ $is_popup    = isset($args['is_popup']) && $args['is_popup'];
 .cmg-paywall-card-wrap {
     position: -webkit-sticky !important;
     position: sticky !important;
-    top: 120px !important;
+    top: 130px !important;
     z-index: 60 !important;
     display: flex !important;
     justify-content: center !important;
@@ -102,7 +112,7 @@ $is_popup    = isset($args['is_popup']) && $args['is_popup'];
     max-width: 580px !important;
     pointer-events: auto !important;
     padding: 20px 15px !important;
-    margin: 20px auto 0 auto !important;
+    margin: 0 auto !important;
     box-sizing: border-box !important;
 }
 

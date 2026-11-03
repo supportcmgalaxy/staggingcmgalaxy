@@ -764,6 +764,9 @@ function cmg_render_paywall_gate($post_id = null) {
         $post_id = get_the_ID();
     }
     $raw_post_content = get_post_field('post_content', $post_id);
+    if (function_exists('do_blocks')) {
+        $raw_post_content = do_blocks($raw_post_content);
+    }
     $formatted_content = wpautop($raw_post_content);
     
     // Split content into block chunks (paragraphs, headings, lists, tables, etc.)
