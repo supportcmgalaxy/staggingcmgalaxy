@@ -869,6 +869,14 @@ add_filter('content_control_restriction_message', function($message) {
     return $message;
 }, 999);
 
+// Add cmg-gated-doc body class on restricted/gated doc posts
+add_filter('body_class', function($classes) {
+    if (is_singular(array('docs', 'post')) && function_exists('cmg_is_post_restricted_to_logged_in') && cmg_is_post_restricted_to_logged_in(get_the_ID())) {
+        $classes[] = 'cmg-gated-doc';
+    }
+    return $classes;
+});
+
 add_filter('content_control/prevent_redirect', '__return_true', 999);
 add_filter('content_control/do_redirect', '__return_false', 999);
 add_filter('rbcr_do_redirect', '__return_false', 999);

@@ -624,6 +624,17 @@ body.page-template-page-all-categories,
     z-index: 2 !important;
 }
 
+/* Gray Indicator Bar for Gated / Paywalled Posts (where modal appears) */
+.sidebar-subcat-post-item.gated-article .active-indicator-bar,
+.sidebar-sub-subcat-item.gated-article .active-indicator-bar,
+.sidebar-subcat-post-item .active-indicator-bar.is-gated,
+.sidebar-sub-subcat-item .active-indicator-bar.is-gated,
+body.cmg-gated-doc .sidebar-subcat-post-item.active-article .active-indicator-bar,
+body.cmg-gated-doc .sidebar-sub-subcat-item.active-article .active-indicator-bar,
+body.cmg-gated-doc .sidebar-subcat-post-item .active-indicator-bar {
+    background: #94a3b8 !important;
+}
+
 /* Level 3 sub-subcategory item */
 .sidebar-sub-subcat-item {
     position: relative !important;
@@ -1323,6 +1334,14 @@ body.page-template-page-all-categories,
     color: #2563eb !important;
     font-weight: 500 !important;
     border-left: 2px solid #2563eb !important;
+}
+
+body.cmg-gated-doc #docy-toc .nav-link.active,
+body.cmg-gated-doc #docy-toc li.active > .nav-link,
+body.cmg-gated-doc #docy-toc .toc-h1.active > .nav-link,
+body.cmg-gated-doc #docy-toc .toc-h2.active > .nav-link,
+body.cmg-gated-doc #docy-toc .toc-h3.active > .nav-link {
+    border-left: 2px solid #94a3b8 !important;
 }
 
 /* Absolutely suppress all pseudo-element lines so only 1 single line exists */

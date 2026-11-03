@@ -371,13 +371,15 @@ $sidebar_instance_id = uniqid('docs_sb_');
                             foreach ($main_direct_posts as $main_post) {
                                 $rendered_post_ids[] = $main_post->ID;
                                 $is_current_post = $is_single_doc && ($current_post_id == $main_post->ID);
+                                $is_main_gated   = function_exists('cmg_is_post_restricted_to_logged_in') && cmg_is_post_restricted_to_logged_in($main_post->ID);
+                                $indicator_color = $is_main_gated ? '#94a3b8' : '#3B82F6';
                                 $post_color = $is_current_post ? '#3B82F6' : '#64748b';
                                 $post_weight = $is_current_post ? '500' : '400';
-                                $post_wrapper_class = 'sidebar-subcat-post-item' . ($is_current_post ? ' active-article' : '');
+                                $post_wrapper_class = 'sidebar-subcat-post-item' . ($is_current_post ? ' active-article' : '') . ($is_main_gated ? ' gated-article' : '');
                                 ?>
                                 <div class="<?php echo esc_attr($post_wrapper_class); ?> cm-tooltip-target" data-cm-tooltip="<?php echo esc_attr($main_post->post_title); ?>" style="padding: 10px 0 10px 35px; position: relative;">
                                     <?php if ($is_current_post): ?>
-                                        <div class="active-indicator-bar" style="position: absolute; left: 20px; top: 0; bottom: 0; width: 2px; background: #3B82F6;"></div>
+                                        <div class="active-indicator-bar <?php echo $is_main_gated ? 'is-gated' : ''; ?>" style="position: absolute; left: 20px; top: 0; bottom: 0; width: 2px; background: <?php echo esc_attr($indicator_color); ?>;"></div>
                                     <?php endif; ?>
                                     <a href="<?php echo esc_url(get_permalink($main_post->ID)); ?>" class="cm-tooltip-target" data-cm-tooltip="<?php echo esc_attr($main_post->post_title); ?>" style="color: <?php echo $post_color; ?>; font-size: 13.5px; text-decoration: none; font-weight: <?php echo $post_weight; ?>; display: flex; align-items: center; line-height: 1.4; width: 100%;">
                                         <span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex: 1; pointer-events: none;"><?php echo esc_html($main_post->post_title); ?></span>
@@ -495,12 +497,15 @@ $sidebar_instance_id = uniqid('docs_sb_');
                                                         <?php foreach ($ss_posts as $ssp): 
                                                             $rendered_post_ids[] = $ssp->ID;
                                                             $is_cur = ($current_post_id == $ssp->ID);
+                                                            $is_ssp_gated = function_exists('cmg_is_post_restricted_to_logged_in') && cmg_is_post_restricted_to_logged_in($ssp->ID);
+                                                            $indicator_color = $is_ssp_gated ? '#94a3b8' : '#3B82F6';
                                                             $post_color = $is_cur ? '#3B82F6' : '#64748b';
                                                             $post_weight = $is_cur ? '500' : '400';
+                                                            $wrapper_class = 'sidebar-subcat-post-item' . ($is_cur ? ' active-article' : '') . ($is_ssp_gated ? ' gated-article' : '');
                                                         ?>
-                                                            <div class="sidebar-subcat-post-item <?php echo $is_cur ? 'active-article' : ''; ?> cm-tooltip-target" data-cm-tooltip="<?php echo esc_attr($ssp->post_title); ?>" style="padding: 10px 0 10px 20px; position: relative;">
+                                                            <div class="<?php echo esc_attr($wrapper_class); ?> cm-tooltip-target" data-cm-tooltip="<?php echo esc_attr($ssp->post_title); ?>" style="padding: 10px 0 10px 20px; position: relative;">
                                                                 <?php if ($is_cur): ?>
-                                                                    <div class="active-indicator-bar" style="position: absolute; left: 10px; top: 0; bottom: 0; width: 2px; background: #3B82F6;"></div>
+                                                                    <div class="active-indicator-bar <?php echo $is_ssp_gated ? 'is-gated' : ''; ?>" style="position: absolute; left: 10px; top: 0; bottom: 0; width: 2px; background: <?php echo esc_attr($indicator_color); ?>;"></div>
                                                                 <?php endif; ?>
                                                                 <a href="<?php echo esc_url(get_permalink($ssp->ID)); ?>" class="cm-tooltip-target" data-cm-tooltip="<?php echo esc_attr($ssp->post_title); ?>" style="color: <?php echo $post_color; ?>; font-size: 13.5px; text-decoration: none; font-weight: <?php echo $post_weight; ?>; display: flex; align-items: center; line-height: 1.4; width: 100%;">
                                                                     <span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex: 1; pointer-events: none;"><?php echo esc_html($ssp->post_title); ?></span>
@@ -516,12 +521,15 @@ $sidebar_instance_id = uniqid('docs_sb_');
                                                 foreach ($sub_posts as $sp) :
                                                     $rendered_post_ids[] = $sp->ID;
                                                     $is_cur = ($current_post_id == $sp->ID);
+                                                    $is_sp_gated = function_exists('cmg_is_post_restricted_to_logged_in') && cmg_is_post_restricted_to_logged_in($sp->ID);
+                                                    $indicator_color = $is_sp_gated ? '#94a3b8' : '#3B82F6';
                                                     $post_color = $is_cur ? '#3B82F6' : '#64748b';
                                                     $post_weight = $is_cur ? '500' : '400';
+                                                    $wrapper_class = 'sidebar-subcat-post-item' . ($is_cur ? ' active-article' : '') . ($is_sp_gated ? ' gated-article' : '');
                                                 ?>
-                                                    <div class="sidebar-subcat-post-item <?php echo $is_cur ? 'active-article' : ''; ?> cm-tooltip-target" data-cm-tooltip="<?php echo esc_attr($sp->post_title); ?>" style="padding: 10px 0 10px 15px; position: relative;">
+                                                    <div class="<?php echo esc_attr($wrapper_class); ?> cm-tooltip-target" data-cm-tooltip="<?php echo esc_attr($sp->post_title); ?>" style="padding: 10px 0 10px 15px; position: relative;">
                                                         <?php if ($is_cur): ?>
-                                                            <div class="active-indicator-bar" style="position: absolute; left: -1px; top: 0; bottom: 0; width: 2px; background: #3B82F6;"></div>
+                                                            <div class="active-indicator-bar <?php echo $is_sp_gated ? 'is-gated' : ''; ?>" style="position: absolute; left: -1px; top: 0; bottom: 0; width: 2px; background: <?php echo esc_attr($indicator_color); ?>;"></div>
                                                         <?php endif; ?>
                                                         <a href="<?php echo esc_url(get_permalink($sp->ID)); ?>" class="cm-tooltip-target" data-cm-tooltip="<?php echo esc_attr($sp->post_title); ?>" style="color: <?php echo $post_color; ?>; font-size: 13.5px; text-decoration: none; font-weight: <?php echo $post_weight; ?>; display: flex; align-items: center; line-height: 1.4; width: 100%;">
                                                             <span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex: 1; pointer-events: none;"><?php echo esc_html($sp->post_title); ?></span>
