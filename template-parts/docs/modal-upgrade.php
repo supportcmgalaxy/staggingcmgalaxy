@@ -41,6 +41,9 @@ $is_popup    = isset($args['is_popup']) && $args['is_popup'];
 }
 
 .cmg-paywall-gate {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    grid-template-rows: 1fr !important;
     position: relative !important;
     width: 100% !important;
     margin-top: 15px !important;
@@ -49,6 +52,8 @@ $is_popup    = isset($args['is_popup']) && $args['is_popup'];
 }
 
 .cmg-blurred-backdrop {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
     position: relative !important;
     width: 100% !important;
     max-height: none !important;
@@ -86,32 +91,32 @@ $is_popup    = isset($args['is_popup']) && $args['is_popup'];
 }
 
 .cmg-paywall-sticky-overlay {
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    display: flex !important;
-    justify-content: center !important;
-    align-items: flex-start !important;
-    pointer-events: none !important;
-    z-index: 50 !important;
-}
-
-.cmg-paywall-card-wrap {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    align-self: start !important;
+    justify-self: center !important;
     position: -webkit-sticky !important;
     position: sticky !important;
-    top: 130px !important;
+    top: 50vh !important;
+    transform: translateY(-50%) !important;
+    width: 100% !important;
+    max-width: 580px !important;
+    height: fit-content !important;
     z-index: 60 !important;
+    pointer-events: none !important;
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
+    margin: 0 auto !important;
+}
+
+.cmg-paywall-card-wrap {
     width: 100% !important;
     max-width: 580px !important;
     pointer-events: auto !important;
-    padding: 20px 15px !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
     margin: 0 auto !important;
     box-sizing: border-box !important;
 }
