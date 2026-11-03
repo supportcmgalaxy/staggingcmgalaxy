@@ -764,6 +764,7 @@ function cmg_render_paywall_gate($post_id = null) {
         $post_id = get_the_ID();
     }
     $raw_post_content = get_post_field('post_content', $post_id);
+    $raw_post_content = preg_replace('/[\x{1F300}-\x{1F9FF}\x{2600}-\x{26FF}\x{2700}-\x{27BF}\x{1F600}-\x{1F64F}\x{1F680}-\x{1F6FF}\x{1F1E0}-\x{1F1FF}\x{1FA00}-\x{1FA6F}\x{1FA70}-\x{1FAFF}\x{2300}-\x{23FF}\x{200D}\x{FE0F}]/u', '', $raw_post_content);
     if (function_exists('do_blocks')) {
         $raw_post_content = do_blocks($raw_post_content);
     }

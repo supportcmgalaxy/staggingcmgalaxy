@@ -85,6 +85,19 @@ $is_popup    = isset($args['is_popup']) && $args['is_popup'];
     pointer-events: none !important;
 }
 
+.cmg-blurred-backdrop img.emoji,
+.cmg-blurred-backdrop .emoji,
+img.wp-smiley,
+img.emoji {
+    width: 1.15em !important;
+    height: 1.15em !important;
+    max-width: 1.15em !important;
+    max-height: 1.15em !important;
+    display: inline !important;
+    margin: 0 0.15em !important;
+    vertical-align: -0.15em !important;
+}
+
 .cmg-paywall-sticky-overlay {
     z-index: 60 !important;
     pointer-events: none !important;
