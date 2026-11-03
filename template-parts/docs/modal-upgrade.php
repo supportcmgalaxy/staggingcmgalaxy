@@ -114,6 +114,11 @@ img.emoji {
 }
 
 .cmg-paywall-sticky-overlay {
+    position: absolute !important;
+    top: 40px !important;
+    bottom: auto !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
     z-index: 60 !important;
     pointer-events: none !important;
     display: flex !important;
@@ -126,13 +131,12 @@ img.emoji {
     max-width: 580px !important;
 }
 
-/* Default / Viewport Center when reading gated content */
-.cmg-paywall-sticky-overlay,
+/* Viewport Center when scrolling through article */
 .cmg-paywall-sticky-overlay.is-fixed {
     position: fixed !important;
     top: 50% !important;
     bottom: auto !important;
-    transform: translateY(-50%) !important;
+    transform: translate(-50%, -50%) !important;
 }
 
 /* Before reaching center (top of article) */

@@ -271,7 +271,7 @@ function cmg_enqueue_docs_assets() {
         ));
     }
 }
-add_action('wp_enqueue_scripts', 'cmg_enqueue_docs_assets', 20);
+add_action('wp_enqueue_scripts', 'cmg_enqueue_docs_assets', 99999);
 
 /**
  * Output Critical CSS and Preloads in <head> to eliminate FOUC on hard reloads
@@ -303,6 +303,43 @@ add_action('wp_head', function() {
                 margin: 0 !important;
                 padding: 0 !important;
                 border: none !important;
+            }
+
+            /* Critical Layout to prevent FOUC / layout shift */
+            .docs-main-wrapper {
+                width: 100% !important;
+                box-sizing: border-box !important;
+            }
+            .docs-layout-row {
+                display: flex !important;
+                flex-wrap: wrap !important;
+                width: 100% !important;
+                align-items: flex-start !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            .docs-col-sidebar {
+                flex: 0 0 20% !important;
+                max-width: 20% !important;
+                width: 20% !important;
+                min-width: 0 !important;
+            }
+            .docs-col-content {
+                flex: 0 0 80% !important;
+                max-width: 80% !important;
+                min-width: 0 !important;
+            }
+            .cmg-paywall-gate {
+                position: relative !important;
+                width: 100% !important;
+                min-height: 600px !important;
+            }
+            .cmg-blurred-backdrop {
+                filter: blur(5px) !important;
+                -webkit-filter: blur(5px) !important;
+                opacity: 0.55 !important;
+                pointer-events: none !important;
+                user-select: none !important;
             }
 
             :root {
