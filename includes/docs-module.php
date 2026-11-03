@@ -781,7 +781,12 @@ function cmg_render_paywall_gate($post_id = null) {
     if (is_array($blocks) && !empty($blocks)) {
         for ($k = 0; $k < count($blocks); $k += 2) {
             $chunk = $blocks[$k] . (isset($blocks[$k + 1]) ? $blocks[$k + 1] : '');
-            if (empty(trim(strip_tags($chunk)))) continue;
+            $has_text = !empty(trim(strip_tags($chunk)));
+            $has_media = (stripos($chunk, '<img') !== false || stripos($chunk, '<figure') !== false || stripos($chunk, '<svg') !== false || stripos($chunk, '<picture') !== false);
+            
+            if (!$has_text && !$has_media) {
+                continue;
+            }
             
             $block_count++;
             if ($block_count <= $max_teaser) {

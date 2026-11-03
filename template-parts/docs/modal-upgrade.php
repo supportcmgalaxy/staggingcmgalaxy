@@ -85,6 +85,21 @@ $is_popup    = isset($args['is_popup']) && $args['is_popup'];
     pointer-events: none !important;
 }
 
+.cmg-blurred-backdrop figure {
+    margin: 1.5rem 0 !important;
+    max-width: 100% !important;
+}
+
+.cmg-blurred-backdrop figure img,
+.cmg-blurred-backdrop .wp-block-image img,
+.cmg-blurred-backdrop img:not(.emoji) {
+    max-width: 100% !important;
+    height: auto !important;
+    border-radius: 8px !important;
+    display: block !important;
+    margin: 1rem 0 !important;
+}
+
 .cmg-blurred-backdrop img.emoji,
 .cmg-blurred-backdrop .emoji,
 img.wp-smiley,
